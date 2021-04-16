@@ -1,5 +1,12 @@
+html {
+    background-color:antiquewhite;
+    font-family: 'Mukta', sans-serif;
+}
+
+
 h1 {
     text-align: center;
+    height: 70px;
 }
 
 
@@ -9,10 +16,24 @@ h1 {
     height: 50%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .books div {
-    width: 25%;
+    flex: 0 0 33.333333%;
     height: 25%;
     text-align: center;
+    border: 2px solid black;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+#new-book {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.modal {
+    display: none;
 }

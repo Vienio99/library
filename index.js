@@ -1,12 +1,17 @@
-let myLibrary = ['The Lord Of The Rings', 'Harry Potter', 'Hobbit'];
+let myLibrary = ['The Lord Of The Rings', 'Harry Potter', 'Hobbit', 'The Name of The Wind', 'Golden compass', 'Shadow of The Gods'];
 
-let books = document.querySelector('.books');
 
-function Book() {
+function Book(author, title, pages, status) {
 
 }
 
 function addBookToLibrary() {
+    // do stuff here
+  }
+
+
+const books = document.querySelector('.books');
+function displayBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
         book = document.createElement('div');
         book.textContent = myLibrary[i];
@@ -14,4 +19,27 @@ function addBookToLibrary() {
     }
 }
 
-addBookToLibrary();
+displayBooks();
+
+const newBook = document.querySelector('#new-book')
+
+
+const modal = document.querySelector(".modal")
+const closeBtn = document.querySelector(".close-btn")
+
+
+newBook.addEventListener('click', () => {
+    modal.style.display = "block";
+})
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = "none";
+})
+
+window.addEventListener('click', (e) => {
+    console.log(e.target)
+    if (e.target === modal) {
+        console.log(e.target)
+        modal.style.display = "none";
+    }
+})

@@ -4,16 +4,25 @@
     <head>
     <meta charset="utf-8">
 
-    <title>Calculator</title>
-
+    <title>Library app</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="index.css">
     <script src="index.js" defer></script> 
     </head>
 
     <body>
         <h1>Library app</h1>
-        <div class="books">
-            
+        <div id="new-book">
+            <button type="button">New book</button>
         </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <p>this is the text inside a modal</p>
+            </div>
+        </div>
+        <div class="books"></div>
+
     </body>
 </html>
