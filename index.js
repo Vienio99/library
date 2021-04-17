@@ -1,5 +1,6 @@
-let myLibrary = ['The Lord Of The Rings', 'Harry Potter', 'Hobbit', 'The Name of The Wind', 'Golden compass', 'Shadow of The Gods'];
+let myLibrary = [];
 
+form = document.forms[0];
 
 function Book(author, title, pages, status) {
     this.author = author;
@@ -9,16 +10,31 @@ function Book(author, title, pages, status) {
 }
 
 function addBookToLibrary() {
-    // do stuff here
+    book = new Book(form.author.value, form.title.value, form.pages.value, form.status.value);
+    myLibrary.push(book);
+    cleanDisplay();
+    displayBooks();
   }
+
+const submit = document.querySelector('#submit')
+submit.addEventListener('click', () => {
+    addBookToLibrary();
+})
+
 
 
 const books = document.querySelector('.books');
 function displayBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
-        book = document.createElement('div');
-        book.textContent = myLibrary[i];
-        books.appendChild(book);
+        title = document.createElement('div');
+        title.textContent = myLibrary[i].title;
+        books.appendChild(title);
+    }
+}
+
+function cleanDisplay() {
+    while (books.firstChild) {
+        books.removeChild(books.firstChild)
     }
 }
 
@@ -40,7 +56,6 @@ closeBtn.addEventListener('click', () => {
 })
 
 window.addEventListener('click', (e) => {
-    console.log(e.target)
     if (e.target === modal) {
         modal.style.display = "none";
     }

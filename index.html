@@ -23,7 +23,7 @@
                     <h3>Add new book</h3>
                 </div>
                 <div class="modal-form">
-                    <form name="add-book" method="post">
+                    <form name="add-book">
                         <div class="author">
                             <label for="author">Author:</label><br>
                             <input type="text" id="author" name="author">
@@ -32,9 +32,9 @@
                             <label for="title">Title:</label><br>
                             <input type="text" id="title" name="title">
                         </div>
-                        <div class="pages-num">
-                            <label for="pages-num">Number of pages:</label><br>
-                            <input type="text" id="pages-num" name="pages-num">
+                        <div class="pages">
+                            <label for="pages">Number of pages:</label><br>
+                            <input type="text" id="pages" name="pages">
                         </div>
                         <div class="status">
                             <p>Status:</p>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="button">Submit</button>
+                            <button type="button" id="submit">Submit</button>
                         </div>
                     </form>
                 </div>
