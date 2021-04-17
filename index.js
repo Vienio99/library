@@ -2,7 +2,10 @@ let myLibrary = ['The Lord Of The Rings', 'Harry Potter', 'Hobbit', 'The Name of
 
 
 function Book(author, title, pages, status) {
-
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.status = status;
 }
 
 function addBookToLibrary() {
@@ -39,7 +42,6 @@ closeBtn.addEventListener('click', () => {
 window.addEventListener('click', (e) => {
     console.log(e.target)
     if (e.target === modal) {
-        console.log(e.target)
         modal.style.display = "none";
     }
 })

@@ -50,13 +50,15 @@ h1 {
     position: relative;
     background-color: rgb(219, 219, 219);
     padding: 20px;
+    padding-top: 4px;
     margin: auto;
-    width: 30%;
+    width: 20%;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-    top: 20%;
+    top: 10%;
+    border-radius: 10px;
 }
 
 .close-btn {
@@ -73,5 +75,14 @@ h1 {
 
 @-webkit-keyframes animatetop {
     from {top: 100px; opacity: 0}
-    to {top: 20%; opacity: 1}
+    to {top: 10%; opacity: 1}
+}
+
+.modal-header {
+    text-align: center;
+    padding-top: 0;
+}
+
+.status p {
+    margin-bottom: 5px;
 }
