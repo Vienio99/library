@@ -20,7 +20,7 @@ h1 {
 }
 
 .books div {
-    flex: 0 0 33.333333%;
+    flex: 0 0 30%;
     height: 25%;
     text-align: center;
     border: 2px solid black;
@@ -28,6 +28,10 @@ h1 {
     margin-bottom: 50px;
     border-radius: 10px;
     background-color: rgb(164, 184, 179);
+}
+
+.books div p {
+    margin: 5px;
 }
 
 #new-book {
@@ -86,3 +90,12 @@ h1 {
 .status p {
     margin-bottom: 5px;
 }
+
+footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 99.6%;
+    height: 2.5rem;  
+    margin-bottom: 20px;          /* Footer height */
+  }

@@ -9,8 +9,23 @@ function Book(author, title, pages, status) {
     this.status = status;
 }
 
+function addExamples() {
+    book = new Book('J. R. R. Tolkien', 'Lord Of The Rings', '564', 'read');
+    book2 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
+    book3 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
+    book4 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
+    myLibrary.push(book);
+    myLibrary.push(book2);
+    myLibrary.push(book3);
+    myLibrary.push(book4);
+}
+
+addExamples();
+
+
 function addBookToLibrary() {
     book = new Book(form.author.value, form.title.value, form.pages.value, form.status.value);
+    console.log(myLibrary)
     myLibrary.push(book);
     cleanDisplay();
     displayBooks();
@@ -19,6 +34,7 @@ function addBookToLibrary() {
 const submit = document.querySelector('#submit')
 submit.addEventListener('click', () => {
     addBookToLibrary();
+    form.reset();
 })
 
 
@@ -26,9 +42,24 @@ submit.addEventListener('click', () => {
 const books = document.querySelector('.books');
 function displayBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
-        title = document.createElement('div');
+        book = document.createElement('div');
+        books.appendChild(book);
+
+        author = document.createElement('p')
+        author.textContent = myLibrary[i].author;
+        book.appendChild(author);
+
+        title = document.createElement('h2');
         title.textContent = myLibrary[i].title;
-        books.appendChild(title);
+        book.appendChild(title);
+
+        pages = document.createElement('p');
+        pages.textContent = myLibrary[i].pages;
+        book.appendChild(pages);
+
+        readStatus = document.createElement('p')
+        readStatus.textContent = myLibrary[i].status;
+        book.appendChild(readStatus);
     }
 }
 
@@ -40,7 +71,7 @@ function cleanDisplay() {
 
 displayBooks();
 
-const newBook = document.querySelector('#new-book')
+const newBook = document.querySelector('#new-book button')
 
 
 const modal = document.querySelector(".modal")
