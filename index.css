@@ -1,13 +1,13 @@
 html {
-    font-family: 'Mukta', sans-serif;
-    background-color:#DCE1E3
+    font-family: 'Lato', sans-serif;
+    background-color:#12232E;
 }
 
 
 h1 {
     text-align: center;
     height: 70px;
-    border-bottom: 2px solid #785115;
+    color: #EEFBFB;
 }
 
 
@@ -16,7 +16,7 @@ h1 {
     width: 70%;
     height: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -24,11 +24,11 @@ h1 {
     flex: 0 0 30%;
     height: 25%;
     text-align: center;
-    border: 2px solid black;
     box-sizing: border-box;
     margin-bottom: 50px;
     border-radius: 10px;
-    background-color: #787c72
+    background-color:  #203647;
+    color: #EEFBFB;
 }
 
 .book-content {
@@ -39,9 +39,6 @@ h1 {
 .book-content .buttons {
     display: inline-flex;
     gap: 30px;
-}
-
-.book-content .buttons button {
 }
 
 .books div p {
@@ -67,7 +64,8 @@ h1 {
 
 .modal-content {
     position: relative;
-    background-color: rgb(219, 219, 219);
+    background-color: #203647;
+    color: #EEFBFB;
     padding: 20px;
     padding-top: 4px;
     margin: auto;
@@ -102,6 +100,25 @@ h1 {
     padding-top: 0;
 }
 
+.modal-form button {
+    font-size: 17.5px;
+    color:#EEFBFB;
+    background-color: #007CC7;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.modal-form button:hover {
+    background-color: #015f99;
+}
+
+.modal-form button:active {
+    background-color: #004875;
+}
+
 .status p {
     margin-bottom: 5px;
 }
@@ -113,6 +130,41 @@ footer {
     width: 99.6%;
     height: 2.5rem;  
     margin-bottom: 20px;   
-    border-top: 2px solid #785115       /* Footer height */
+    color: #EEFBFB;     /* Footer height */
   }
 
+
+#new-book svg:hover {
+    cursor: pointer;
+}
+
+#new-book svg:hover #original-icon {
+    fill: #015f99;
+}
+
+#new-book svg:active #original-icon {
+    fill: #004875;
+}
+
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons button {
+    font-size: 17.5px;
+    color:#EEFBFB;
+    background-color: #007CC7;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #015f99;
+}
+
+.buttons button:active {
+    background-color: #004875;
+}
