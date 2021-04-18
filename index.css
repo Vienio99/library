@@ -1,6 +1,8 @@
 html {
-    background-color:antiquewhite;
     font-family: 'Mukta', sans-serif;
+    background-image: url(img/oldLib.jpg); /* fallback for older browsers */
+    background-image: linear-gradient(to bottom, rgba(212, 188, 156, 0.9) 0%,rgba(212, 188, 156, 0.9) 100%), url(img/oldLib.jpg);
+    background-size: 100%;
 }
 
 
@@ -19,7 +21,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-.books div {
+.books .book {
     flex: 0 0 30%;
     height: 25%;
     text-align: center;
@@ -30,9 +32,23 @@ h1 {
     background-color: rgb(164, 184, 179);
 }
 
+.book-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.book-content .buttons {
+    display: inline-flex;
+    gap: 30px;
+}
+
+.book-content .buttons button {
+}
+
 .books div p {
     margin: 5px;
 }
+
 
 #new-book {
     text-align: center;

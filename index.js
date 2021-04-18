@@ -1,19 +1,26 @@
+// List for user's book
+
 let myLibrary = [];
 
 form = document.forms[0];
 
-function Book(author, title, pages, status) {
+// Book constructor
+
+function Book(id, author, title, pages, status) {
+    this.id = id;
     this.author = author;
     this.title = title;
     this.pages = pages;
     this.status = status;
 }
 
+// Examples 
+
 function addExamples() {
-    book = new Book('J. R. R. Tolkien', 'Lord Of The Rings', '564', 'read');
-    book2 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
-    book3 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
-    book4 = new Book('J. K. Rowling', 'Harry Potter', '752', 'not read');
+    book = new Book(1, 'J. R. R. Tolkien', 'Lord Of The Rings', '564', 'Read');
+    book2 = new Book(2, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
+    book3 = new Book(3, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
+    book4 = new Book(4, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
     myLibrary.push(book);
     myLibrary.push(book2);
     myLibrary.push(book3);
@@ -22,10 +29,11 @@ function addExamples() {
 
 addExamples();
 
+// Helper functions
 
 function addBookToLibrary() {
-    book = new Book(form.author.value, form.title.value, form.pages.value, form.status.value);
-    console.log(myLibrary)
+    id = myLibrary.length + 1
+    book = new Book(id, form.author.value, form.title.value, form.pages.value, form.status.value);
     myLibrary.push(book);
     cleanDisplay();
     displayBooks();
@@ -42,25 +50,48 @@ submit.addEventListener('click', () => {
 const books = document.querySelector('.books');
 function displayBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
-        book = document.createElement('div');
-        books.appendChild(book);
-
-        author = document.createElement('p')
-        author.textContent = myLibrary[i].author;
-        book.appendChild(author);
-
-        title = document.createElement('h2');
-        title.textContent = myLibrary[i].title;
-        book.appendChild(title);
-
-        pages = document.createElement('p');
-        pages.textContent = myLibrary[i].pages;
-        book.appendChild(pages);
-
-        readStatus = document.createElement('p')
-        readStatus.textContent = myLibrary[i].status;
-        book.appendChild(readStatus);
+        id = myLibrary[i].id;
+        createBookContainer(id);
     }
+}
+
+function createBookContainer(id) {
+
+    let bookFromList = myLibrary.find(bookFromList => bookFromList.id === id)
+    book = document.createElement('div');
+    book.classList.add('book')
+    book.setAttribute('id', id)
+    books.appendChild(book);
+
+    bookContent = document.createElement('div')
+    bookContent.classList.add('book-content')
+    book.appendChild(bookContent)
+    
+    author = document.createElement('p')
+    author.textContent = bookFromList.author;
+    bookContent.appendChild(author);
+
+    title = document.createElement('h2');
+    title.textContent = bookFromList.title;
+    bookContent.appendChild(title);
+
+    pages = document.createElement('p');
+    pages.textContent = bookFromList.pages + ' pages';
+    bookContent.appendChild(pages);
+
+    buttons = document.createElement('div')
+    buttons.classList.add('buttons');
+    bookContent.appendChild(buttons);
+
+    editStatus = document.createElement('button');
+    editStatus.classList.add('edit-status');
+    editStatus.textContent = bookFromList.status;
+    buttons.appendChild(editStatus);
+
+    remove = document.createElement('button');
+    remove.classList.add('remove-book');
+    remove.textContent = 'Remove';
+    buttons.appendChild(remove);
 }
 
 function cleanDisplay() {
@@ -71,9 +102,12 @@ function cleanDisplay() {
 
 displayBooks();
 
+
+
+
+// Modal
+
 const newBook = document.querySelector('#new-book button')
-
-
 const modal = document.querySelector(".modal")
 const closeBtn = document.querySelector(".close-btn")
 
@@ -89,5 +123,34 @@ closeBtn.addEventListener('click', () => {
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
+    }
+})
+
+const bookContainers = document.querySelector('.books')
+
+bookContainers.addEventListener('click', (e) => {
+    if (e.target && e.target.className === 'edit-status') {
+        bookId = e.target.parentNode.parentNode.parentNode.id;
+        console.log(bookId)
+        book = myLibrary.find(book => book.id === Number(bookId))
+        if (book.status === 'Read') {
+            book.status = 'Not read';
+            e.target.textContent = book.status;
+        } else {
+            book.status = 'Read';
+            e.target.textContent = book.status;
+    }}
+})
+
+
+bookContainers.addEventListener('click', (e) => {
+    console.log(e.target)
+    if (e.target && e.target.className === 'remove-book') {
+        bookId = e.target.parentNode.parentNode.parentNode.id;
+        book = myLibrary.find(book => book.id === Number(bookId));
+        bookIndex = myLibrary.indexOf(book)
+        myLibrary.splice(bookIndex, 1)
+        cleanDisplay();
+        displayBooks();
     }
 })
