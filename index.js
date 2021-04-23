@@ -4,7 +4,7 @@ let myLibrary = [];
 
 // Form
 
-let form = document.forms[0];
+let form = document.forms[1];
 
 // Book constructor
 
@@ -15,28 +15,22 @@ function Book(id, author, title, pages, status) {
     this.pages = pages;
     this.status = status;
 }
-// Examples 
-// function addExamples() {
-//     let book = new Book(1, 'J. R. R. Tolkien', 'Lord Of The Rings', '564', 'Read');
-//     let book2 = new Book(2, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-//     let book3 = new Book(3, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-//     let book4 = new Book(4, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-//     myLibrary.push(book);
-//     myLibrary.push(book2);
-//     myLibrary.push(book3);
-//     myLibrary.push(book4);
-// }
 
-// addExamples();
+// Form listener and save book to local storage
 
-// Helper functions
-
-
-
-form.addEventListener('submit', () => {
-    addBookToLocalLibrary();
+form.addEventListener('submit', (e) => {
+    addBookToLocalLibrary(e);
     modal.style.display = "none";
 })
+
+function addBookToLocalLibrary(e) {
+    e.preventDefault();
+    let newBook = getBookFromInput();
+    localStorage.setItem(newBook.id, JSON.stringify(newBook));  
+    cleanDisplay();
+    displayBooks();
+  }
+
 
 function getBookFromInput() {
     let id;
@@ -50,22 +44,13 @@ function getBookFromInput() {
     return new Book(id, form.author.value, form.title.value, form.pages.value, form.status.value)
 }
 
-function addBookToLocalLibrary() {
-    let newBook = getBookFromInput();
-    storeBookLocal(newBook);   
-    cleanDisplay();
-    displayBooks();
-  }
 
-
-function storeBookLocal(book) {
-    localStorage.setItem(book.id, JSON.stringify(book));    
-}
+// 
 
 function addLocalStorageForDisplay() {
+    myLibrary = [];
     let lastBookId = JSON.parse(localStorage.getItem('lastId'));
     for (let i = 1; i < lastBookId + 1; i++) {
-        console.log(i)
         if (localStorage.getItem(i)) {
             let parsedBook = JSON.parse(localStorage.getItem(i));
             myLibrary.push(parsedBook);
@@ -75,11 +60,7 @@ function addLocalStorageForDisplay() {
 
 
 
-console.log(localStorage)
-
-const books = document.querySelector('.books');
 function displayBooks() {
-    myLibrary = [];
     addLocalStorageForDisplay();
     for (let i = 0; i < myLibrary.length; i++) {
         let id = myLibrary[i].id;
@@ -87,6 +68,7 @@ function displayBooks() {
     }
 }
 
+const books = document.querySelector('.books');
 function cleanDisplay() {
     while (books.firstChild) {
         books.removeChild(books.firstChild)
@@ -138,7 +120,7 @@ function createBookContainer(id) {
 
 // Modal
 
-const newBook = document.querySelector('#new-book svg')
+const newBook = document.querySelector('#main-buttons svg')
 const modal = document.querySelector(".modal")
 const closeBtn = document.querySelector(".close-btn")
 
@@ -148,9 +130,10 @@ newBook.addEventListener('click', () => {
 })
 
 
+// Hide modal after clicking close button or clicking outside of it
+
 closeBtn.addEventListener('click', () => {
     modal.style.display = "none";
-    console.log(invalidInput.checkValidity())
 })
 
 
@@ -160,24 +143,23 @@ window.addEventListener('click', (e) => {
     }
 })
 
-const bookContainers = document.querySelector('.books')
+// Edit book status
 
+const bookContainers = document.querySelector('.books')
 bookContainers.addEventListener('click', (e) => {
     if (e.target && e.target.className === 'edit-status') {
         let bookId = e.target.parentNode.parentNode.parentNode.id;
         let book = myLibrary.find(book => book.id === Number(bookId))
-        console.log(book)
         if (book.status === 'Read') {
             book.status = 'Not read';
-            e.target.textContent = book.status;
-            localStorage.setItem(bookId, JSON.stringify(book));
         } else {
             book.status = 'Read';
-            e.target.textContent = book.status;
-            localStorage.setItem(bookId, JSON.stringify(book));
-    }}
-})
+    }
+    e.target.textContent = book.status;
+    localStorage.setItem(bookId, JSON.stringify(book));
+}})
 
+// Remove book
 
 bookContainers.addEventListener('click', (e) => {
     if (e.target && e.target.className === 'remove-book') {
@@ -192,3 +174,37 @@ bookContainers.addEventListener('click', (e) => {
     }
 })
 
+// Remove local storage
+
+const removeLibrary = document.querySelector('.remove-library');
+const modalRemove = document.querySelector(".modal-remove")
+const closeBtnRemove = document.querySelector(".modal-remove-close-btn")
+
+removeLibrary.addEventListener('click', () => {
+    modalRemove.style.display = "block";
+})
+
+closeBtn.addEventListener('click', () => {
+    modalRemove.style.display = "none";
+})
+
+
+window.addEventListener('click', (e) => {
+    if (e.target === modalRemove) {
+        modalRemove.style.display = "none";
+    }
+})
+
+
+const formRemove = document.forms[0];
+
+formRemove.addEventListener('submit', (e) => {
+    const radioValue = document.querySelector(".remove-yes");
+    e.preventDefault();
+    if (radioValue.checked === true) {
+        localStorage.clear();
+        cleanDisplay();
+        displayBooks();
+    }
+    modalRemove.style.display = "none";
+})

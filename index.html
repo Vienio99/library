@@ -14,7 +14,7 @@
 
     <body>
         <h1>Library app</h1>
-        <div id="new-book">
+        <div id="main-buttons">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                     width="64" height="64"
@@ -22,7 +22,28 @@
                     style=" fill:#000000;"><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="#12232e"></path><path d="" fill="none"></path><path d="" fill="none"></path><path d="" fill="none"></path><path d="" fill="none"></path><path d="" fill="none"></path><g id="original-icon" fill="#3498db"><path d="M48.375,21.5c-8.84171,0 -16.125,7.28329 -16.125,16.125v96.75c0,8.84171 7.28329,16.125 16.125,16.125h43.47241c7.46654,12.81451 21.33063,21.5 37.15259,21.5c23.65,0 43,-19.35 43,-43c0,-19.93564 -13.76583,-36.76174 -32.25,-41.57227v-65.92773zM48.375,32.25h80.625v53.75c-19.93564,0 -36.76174,13.76583 -41.57227,32.25h-39.05273c-1.89115,0 -3.68246,0.39743 -5.375,1.00781v-81.63281c0,-3.03704 2.33796,-5.375 5.375,-5.375zM59.125,48.375v10.75h59.125v-10.75zM129,96.75c17.7375,0 32.25,14.5125 32.25,32.25c0,17.7375 -14.5125,32.25 -32.25,32.25c-17.7375,0 -32.25,-14.5125 -32.25,-32.25c0,-17.7375 14.5125,-32.25 32.25,-32.25zM123.625,107.5v16.125h-16.125v10.75h16.125v16.125h10.75v-16.125h16.125v-10.75h-16.125v-16.125zM48.375,129h37.625c0,3.71436 0.53145,7.30608 1.42773,10.75h-39.05273c-3.03704,0 -5.375,-2.33796 -5.375,-5.375c0,-3.03704 2.33796,-5.375 5.375,-5.375z"></path></g></g></g>
                 </svg>
             </div>
+            <button type="button" class="remove-library">Remove library</button>
+            <div class="modal-remove" class="modal-remove-hidden">
+                <span class="modal-remove-close-btn">&times;</span>
+                <div class="modal-remove-content">
+                    <div class="modal-remove-form">
+                        <h2>Are you sure?</h2>
+                        <form>
+                            <div>
+                                <input type="radio" id="yes" name="confirmation" value="Yes" class="remove-yes">
+                                <label for="yes">Yes</label>          
+                            </div>
+                            <div>
+                                <input type="radio" id="no" name="confirmation" value="No" class="remove-no"checked>
+                                <label for="no">No</label>          
+                            </div>
+                            <button type="submit" id="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="modal" class="modal-hidden">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>

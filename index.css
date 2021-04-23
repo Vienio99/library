@@ -10,19 +10,43 @@ h1 {
     color: #EEFBFB;
 }
 
-/* New book button */
+/* Main buttons of the page */
 
-#new-book svg:hover {
+#main-buttons {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#main-buttons svg:hover {
     cursor: pointer;
 }
 
-#new-book svg:hover #original-icon {
+#main-buttons svg:hover #original-icon {
     fill: #015f99;
 }
 
-#new-book svg:active #original-icon {
+#main-buttons svg:active #original-icon {
     fill: #004875;
 }
+
+#main-buttons .remove-library {
+    color: #EEFBFB;
+    background-color: rgb(204, 61, 61);
+    margin-top: 1%;
+    width: 10%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+}
+
+#main-buttons .remove-library:hover {
+    background-color: rgb(177, 55, 55);
+}
+
+#main-buttons .remove-library:active {
+    background-color: rgb(150, 44, 44);
+}
+
 
 /* Book containers */
 
@@ -61,10 +85,6 @@ h1 {
 }
 
 
-#new-book {
-    text-align: center;
-    margin-bottom: 50px;
-}
 
 /* Modal */
 
@@ -179,5 +199,58 @@ footer {
 }
 
 .buttons button:active {
+    background-color: #004875;
+}
+
+
+/* Modal remove library */
+
+.modal-remove {
+    display: none;
+    position: fixed;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-remove-active {
+    display: block;
+}
+
+.modal-remove-content {
+    position: relative;
+    background-color: #203647;
+    color: #EEFBFB;
+    padding: 20px;
+    padding-top: 4px;
+    margin: auto;
+    width: 20%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    top: 10%;
+    border-radius: 10px;
+}
+
+.modal-remove-form button {
+    font-size: 17.5px;
+    color:#EEFBFB;
+    background-color: #007CC7;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.modal-remove-form button:hover {
+    background-color: #015f99;
+}
+
+.modal-remove-form button:active {
     background-color: #004875;
 }
