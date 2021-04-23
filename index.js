@@ -2,6 +2,8 @@
 
 let myLibrary = [];
 
+// Form
+
 let form = document.forms[0];
 
 // Book constructor
@@ -15,38 +17,53 @@ function Book(id, author, title, pages, status) {
 }
 
 // Examples 
+// function addExamples() {
+//     let book = new Book(1, 'J. R. R. Tolkien', 'Lord Of The Rings', '564', 'Read');
+//     let book2 = new Book(2, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
+//     let book3 = new Book(3, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
+//     let book4 = new Book(4, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
+//     myLibrary.push(book);
+//     myLibrary.push(book2);
+//     myLibrary.push(book3);
+//     myLibrary.push(book4);
+// }
 
-function addExamples() {
-    let book = new Book(1, 'J. R. R. Tolkien', 'Lord Of The Rings', '564', 'Read');
-    let book2 = new Book(2, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-    let book3 = new Book(3, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-    let book4 = new Book(4, 'J. K. Rowling', 'Harry Potter', '752', 'Not read');
-    myLibrary.push(book);
-    myLibrary.push(book2);
-    myLibrary.push(book3);
-    myLibrary.push(book4);
-}
-
-addExamples();
+// addExamples();
 
 // Helper functions
 
-function addBookToLibrary() {
-    let id = myLibrary.length + 1
-    let book = new Book(id, form.author.value, form.title.value, form.pages.value, form.status.value);
-    myLibrary.push(book);
+function storeBookLocal(book) {
+    localStorage.setItem(book.id, JSON.stringify(book));    
+}
+
+function getBookFromInput() {
+    let id = localStorage.length + 1
+    return new Book(id, form.author.value, form.title.value, form.pages.value, form.status.value)
+}
+
+function addBookToLocalLibrary() {
+    let newBook = getBookFromInput();
+    storeBookLocal(newBook);   
     cleanDisplay();
     displayBooks();
   }
 
-const submit = document.querySelector('#submit')
-submit.addEventListener('click', () => {
-    addBookToLibrary();
+function addLocalStorageForDisplay() {
+    for (let i = 1; i < localStorage.length + 1; i++) {
+        let parsedBook = JSON.parse(localStorage.getItem(i));
+        myLibrary.push(parsedBook);
+    }
+}
+
+
+addLocalStorageForDisplay();
+console.log(myLibrary)
+form.addEventListener('submit', () => {
+    addBookToLocalLibrary();
     modal.style.display = "none";
-    form.reset();
 })
 
-
+console.log(localStorage)
 
 const books = document.querySelector('.books');
 function displayBooks() {
@@ -112,14 +129,21 @@ const newBook = document.querySelector('#new-book svg')
 const modal = document.querySelector(".modal")
 const closeBtn = document.querySelector(".close-btn")
 
+// Create inputs so there is no problem with red borders after reusing the form
+
+const invalidInput = document.querySelector(':invalid');
 
 newBook.addEventListener('click', () => {
+    form.reset();
     modal.style.display = "block";
 })
 
+
 closeBtn.addEventListener('click', () => {
     modal.style.display = "none";
+    console.log(invalidInput.checkValidity())
 })
+
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {

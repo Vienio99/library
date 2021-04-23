@@ -10,6 +10,21 @@ h1 {
     color: #EEFBFB;
 }
 
+/* New book button */
+
+#new-book svg:hover {
+    cursor: pointer;
+}
+
+#new-book svg:hover #original-icon {
+    fill: #015f99;
+}
+
+#new-book svg:active #original-icon {
+    fill: #004875;
+}
+
+/* Book containers */
 
 .books {
     margin: auto;
@@ -51,6 +66,8 @@ h1 {
     margin-bottom: 50px;
 }
 
+/* Modal */
+
 .modal {
     display: none;
     position: fixed;
@@ -60,6 +77,10 @@ h1 {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-active {
+    display: block;
 }
 
 .modal-content {
@@ -123,6 +144,8 @@ h1 {
     margin-bottom: 5px;
 }
 
+/* Footer */
+
 footer {
     position: absolute;
     text-align: center;
@@ -134,18 +157,8 @@ footer {
   }
 
 
-#new-book svg:hover {
-    cursor: pointer;
-}
 
-#new-book svg:hover #original-icon {
-    fill: #015f99;
-}
-
-#new-book svg:active #original-icon {
-    fill: #004875;
-}
-
+/* Buttons for status edit and remove */
 
 .buttons {
     margin-top: 20px;

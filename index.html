@@ -23,7 +23,7 @@
                 </svg>
             </div>
         </div>
-        <div class="modal">
+        <div class="modal" class="modal-hidden">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
                 <div class="modal-header">
@@ -33,15 +33,15 @@
                     <form name="add-book">
                         <div class="author">
                             <label for="author">Author:</label><br>
-                            <input type="text" id="author" name="author">
+                            <input type="text" id="author" name="author" maxlength="50" required>
                         </div>
                         <div class="title">
                             <label for="title">Title:</label><br>
-                            <input type="text" id="title" name="title">
+                            <input type="text" id="title" name="title" maxlength="50" required>
                         </div>
                         <div class="pages">
                             <label for="pages">Number of pages:</label><br>
-                            <input type="text" id="pages" name="pages">
+                            <input type="number" id="pages" name="pages" min="1" max="9999" required>
                         </div>
                         <div class="status">
                             <p>Status:</p>
@@ -54,9 +54,7 @@
                                 <label for="not-read">Not read</label>          
                             </div>
                         </div>
-                        <div>
-                            <button type="button" id="submit">Submit</button>
-                        </div>
+                            <button type="submit" id="submit">Submit</button>
                     </form>
                 </div>
             </div>
