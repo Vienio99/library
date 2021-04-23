@@ -32,12 +32,22 @@ function Book(id, author, title, pages, status) {
 
 // Helper functions
 
-function storeBookLocal(book) {
-    localStorage.setItem(book.id, JSON.stringify(book));    
-}
+
+
+form.addEventListener('submit', () => {
+    addBookToLocalLibrary();
+    modal.style.display = "none";
+})
 
 function getBookFromInput() {
-    let id = localStorage.length + 1
+    let id;
+    if (localStorage.length === 0) {
+        localStorage.setItem('lastId', 1)
+        id = JSON.parse(localStorage.getItem('lastId'))
+    } else {
+        id = JSON.parse(localStorage.getItem('lastId')) + 1;
+        localStorage.setItem('lastId', id)
+    }
     return new Book(id, form.author.value, form.title.value, form.pages.value, form.status.value)
 }
 
@@ -48,30 +58,44 @@ function addBookToLocalLibrary() {
     displayBooks();
   }
 
+
+function storeBookLocal(book) {
+    localStorage.setItem(book.id, JSON.stringify(book));    
+}
+
 function addLocalStorageForDisplay() {
-    for (let i = 1; i < localStorage.length + 1; i++) {
-        let parsedBook = JSON.parse(localStorage.getItem(i));
-        myLibrary.push(parsedBook);
+    let lastBookId = JSON.parse(localStorage.getItem('lastId'));
+    for (let i = 1; i < lastBookId + 1; i++) {
+        console.log(i)
+        if (localStorage.getItem(i)) {
+            let parsedBook = JSON.parse(localStorage.getItem(i));
+            myLibrary.push(parsedBook);
+        }
     }
 }
 
 
-addLocalStorageForDisplay();
-console.log(myLibrary)
-form.addEventListener('submit', () => {
-    addBookToLocalLibrary();
-    modal.style.display = "none";
-})
 
 console.log(localStorage)
 
 const books = document.querySelector('.books');
 function displayBooks() {
+    myLibrary = [];
+    addLocalStorageForDisplay();
     for (let i = 0; i < myLibrary.length; i++) {
         let id = myLibrary[i].id;
         createBookContainer(id);
     }
 }
+
+function cleanDisplay() {
+    while (books.firstChild) {
+        books.removeChild(books.firstChild)
+    }
+}
+
+displayBooks();
+
 
 function createBookContainer(id) {
 
@@ -112,13 +136,7 @@ function createBookContainer(id) {
     buttons.appendChild(remove);
 }
 
-function cleanDisplay() {
-    while (books.firstChild) {
-        books.removeChild(books.firstChild)
-    }
-}
 
-displayBooks();
 
 
 
@@ -128,10 +146,6 @@ displayBooks();
 const newBook = document.querySelector('#new-book svg')
 const modal = document.querySelector(".modal")
 const closeBtn = document.querySelector(".close-btn")
-
-// Create inputs so there is no problem with red borders after reusing the form
-
-const invalidInput = document.querySelector(':invalid');
 
 newBook.addEventListener('click', () => {
     form.reset();
@@ -169,11 +183,13 @@ bookContainers.addEventListener('click', (e) => {
 
 bookContainers.addEventListener('click', (e) => {
     if (e.target && e.target.className === 'remove-book') {
-        bookId = e.target.parentNode.parentNode.parentNode.id;
-        let book = myLibrary.find(book => book.id === Number(bookId));
-        let bookIndex = myLibrary.indexOf(book)
-        myLibrary.splice(bookIndex, 1)
+        let eventBookId = e.target.parentNode.parentNode.parentNode.id;
+        localStorage.removeItem(eventBookId);
         cleanDisplay();
         displayBooks();
+
+        if (localStorage.length === 1) {
+            localStorage.clear();
+        }
     }
 })
