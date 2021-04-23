@@ -15,7 +15,6 @@ function Book(id, author, title, pages, status) {
     this.pages = pages;
     this.status = status;
 }
-
 // Examples 
 // function addExamples() {
 //     let book = new Book(1, 'J. R. R. Tolkien', 'Lord Of The Rings', '564', 'Read');
@@ -137,10 +136,6 @@ function createBookContainer(id) {
 }
 
 
-
-
-
-
 // Modal
 
 const newBook = document.querySelector('#new-book svg')
@@ -171,12 +166,15 @@ bookContainers.addEventListener('click', (e) => {
     if (e.target && e.target.className === 'edit-status') {
         let bookId = e.target.parentNode.parentNode.parentNode.id;
         let book = myLibrary.find(book => book.id === Number(bookId))
+        console.log(book)
         if (book.status === 'Read') {
             book.status = 'Not read';
             e.target.textContent = book.status;
+            localStorage.setItem(bookId, JSON.stringify(book));
         } else {
             book.status = 'Read';
             e.target.textContent = book.status;
+            localStorage.setItem(bookId, JSON.stringify(book));
     }}
 })
 
@@ -193,3 +191,4 @@ bookContainers.addEventListener('click', (e) => {
         }
     }
 })
+
