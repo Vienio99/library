@@ -178,14 +178,9 @@ bookContainers.addEventListener('click', (e) => {
 
 const removeLibrary = document.querySelector('.remove-library');
 const modalRemove = document.querySelector(".modal-remove")
-const closeBtnRemove = document.querySelector(".modal-remove-close-btn")
 
 removeLibrary.addEventListener('click', () => {
     modalRemove.style.display = "block";
-})
-
-closeBtn.addEventListener('click', () => {
-    modalRemove.style.display = "none";
 })
 
 
